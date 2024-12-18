@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,6 +35,14 @@ class MainActivity : ComponentActivity() {
             MyThirdComposeAppTheme() {
                 //MyConstraintLayout()
 
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ){
+                    SuperHeroView()
+                }
+
+                /**
                 var sliderPosition by rememberSaveable { mutableStateOf(0f) }
 
                 var openAlert by rememberSaveable { mutableStateOf(false) }
@@ -55,6 +65,7 @@ class MainActivity : ComponentActivity() {
                         onDismiss = { openAlert = false }
                     )
                 }
+                **/
             }
         }
     }
