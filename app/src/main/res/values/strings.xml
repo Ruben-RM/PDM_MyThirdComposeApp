@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyThirdComposeApp</string>
+    <string name="title_activity_states">StatesActivity</string>
+</resources>
