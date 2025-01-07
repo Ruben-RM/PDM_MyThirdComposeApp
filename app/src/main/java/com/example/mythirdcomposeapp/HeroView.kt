@@ -20,6 +20,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mythirdcomposeapp.model.SuperHero
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import kotlinx.coroutines.launch
 
 @Composable
 fun SuperHeroView()
@@ -71,6 +76,46 @@ fun SuperHeroViewScroll() {
                 .padding(8.dp)
         ) {
             Text(text="Haz cosas")
+        }
+    }
+}
+
+@Composable
+fun SuperHeroViewScroll2() {
+    val context = LocalContext.current
+    val rvState = rememberLazyListState()
+
+    val showButton by remember {
+        derivedStateOf { rvState.firstVisibleItemIndex > 0 }
+    }
+
+    val coroutine = rememberCoroutineScope()
+
+    Column()
+    {
+        LazyColumn(
+            state = rvState,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.weight(1f)
+        ) {
+            items(getSuperHeroes()) {
+                ItemHero(it) {
+                    Toast.makeText(context, it.superHeroName, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        if(showButton)
+        {
+            Button(
+                onClick = { coroutine.launch { rvState.animateScrollToItem(0) } },
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(8.dp)
+            ) {
+                Text(text = "Volver arriba")
+            }
         }
     }
 }

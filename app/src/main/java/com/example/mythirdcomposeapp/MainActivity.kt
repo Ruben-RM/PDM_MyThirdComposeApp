@@ -40,7 +40,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ){
                     //SuperHeroView()
-                    SuperHeroGridView()
+                    //SuperHeroViewScroll()
+                    SuperHeroViewScroll2()
+                    //SuperHeroGridView()
                 }
 
                 /**
